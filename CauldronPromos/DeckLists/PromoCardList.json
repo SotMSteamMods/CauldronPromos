@@ -1,0 +1,42 @@
+﻿{
+  "MrFixer": [
+    {
+        "identifier": "MrFixerCharacter",
+        "promoIdentifier": "EnlightenedMrFixerCharacter",
+        "count": 1,
+        "title": "Mr. Fixer",
+        "promoTitle": "Enlightened Mr. Fixer",
+        "body": "Chi Strike",
+        "icons": [
+            "HasPower",
+            "DealDamageRadiant",
+            "Discard"
+        ],
+        "backgroundColor": "EB8A77",
+        "foilBackgroundColor": "EB8A77",
+        "hitpointsColor": "EB8A77",
+        "character": true,
+        "powers": [
+            "{MrFixer} deals 1 target 2 radiant damage. One player discards a card."
+        ],
+        "hitpoints": 27,
+        "nemesisIdentifiers": [
+            "MrFixer"
+        ],
+        "incapacitatedAbilities": [
+            "One player may play a card now.",
+            "Destroy a target with 2 or fewer HP.",
+            "Discard the top card of 1 deck."
+        ],
+        "flippedIcons": [
+            "PlayCardNow",
+            "Destroy",
+            "Discard"
+        ],
+        "complexity": 2,
+        "openingLines": {
+            "default": "-"
+        }
+    }
+  ]
+}
