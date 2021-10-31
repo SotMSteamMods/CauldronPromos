@@ -17,7 +17,8 @@
 	"dll": "CauldronPromos.dll",
 	"variants": {
 		"AbsoluteZero": [ "NitroBoostAbsoluteZeroCharacter" ],
-		"Bunker":  ["SiegeBreakerBunkerCharacter"],
+		"Bunker": [ "SiegeBreakerBunkerCharacter" ],
+		"Expatriette":  ["UrbanWarfareExpatrietteCharacter"],
 		"MrFixer": [ "EnlightenedMrFixerCharacter", "NorthernWindMrFixerCharacter" ]
 	}
 }
