@@ -10,7 +10,7 @@
 	<Description>The Cauldron Promos Fan Expansion for the Sentinels of the Multiverse Digital Card Game.</Description>
 	<Copyright>All rights reserved, 2021-2022</Copyright>
 	<PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<PackageProjectUrl>https://github.com/SotMSteamMods/CauldronMods</PackageProjectUrl>
+	<PackageProjectUrl>https://github.com/SotMSteamMods/CauldronPromos</PackageProjectUrl>
 	<RepositoryUrl></RepositoryUrl>
 	<NeutralLanguage>en</NeutralLanguage>
 	<AssemblyName>CauldronPromos</AssemblyName>
