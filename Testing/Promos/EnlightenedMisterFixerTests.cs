@@ -38,8 +38,24 @@ namespace CauldronPromosTests
         {
             SetupGameController("BaronBlade", "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter", "Legacy", "Haka", "Ra", "Megalopolis");
             StartGame();
+            DestroyNonCharacterVillainCards();
 
             //Mr Fixer deals 1 target 2 radiant damage. One player discards a card.
+            Card cardToDiscard = GetRandomCardFromHand(legacy);
+            DecisionSelectCards = new Card[] { baron.CharacterCard, cardToDiscard };
+            DecisionSelectTurnTakers = new TurnTaker[] { legacy.TurnTaker };
+
+            QuickHPStorage(baron, fixer, legacy, haka, ra);
+            QuickHandStorage(fixer, legacy, haka, ra);
+
+            UsePower(fixer);
+
+            QuickHPCheck(-2, 0, 0, 0, 0);
+            QuickHandCheck(0, -1, 0, 0);
+            AssertInTrash(legacy, cardToDiscard);
+            
+
+
         }
 
         [Test()]
@@ -47,9 +63,12 @@ namespace CauldronPromosTests
         {
             SetupGameController("BaronBlade", "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter", "Legacy", "Haka", "Ra", "Megalopolis");
             StartGame();
+            DestroyNonCharacterVillainCards();
             SetupIncap(baron);
 
             //One player may play a card now.
+            Card cardToPlay = PutInHand("NextEvolution");
+            AssertIncapLetsHeroPlayCard(fixer, 0, legacy, cardToPlay.Identifier);
         }
 
         [Test()]
@@ -57,9 +76,23 @@ namespace CauldronPromosTests
         {
             SetupGameController("BaronBlade", "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter", "Legacy", "Haka", "Ra", "Megalopolis");
             StartGame();
+            DestroyNonCharacterVillainCards();
             SetupIncap(baron);
 
+            Card battalion = PlayCard("BladeBattalion");
+            Card redistributor = PlayCard("ElementalRedistributor");
+
+            SetHitPoints(battalion, 2);
+            SetHitPoints(redistributor, 1);
+
             //Destroy a target with 2 or fewer HP.
+
+            DecisionSelectCards = new Card[] { redistributor };
+
+            UseIncapacitatedAbility(fixer, 1);
+
+            AssertInTrash(baron, redistributor);
+            AssertInPlayArea(baron, battalion);
 
         }
 
@@ -68,9 +101,25 @@ namespace CauldronPromosTests
         {
             SetupGameController("BaronBlade", "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter", "Legacy", "Haka", "Ra", "Megalopolis");
             StartGame();
+            DestroyNonCharacterVillainCards();
             SetupIncap(baron);
 
+            Card baronTopCard = baron.TurnTaker.Deck.TopCard;
+            Card legacyTopCard = legacy.TurnTaker.Deck.TopCard;
+            Card hakaTopCard = haka.TurnTaker.Deck.TopCard;
+            Card raTopCard = ra.TurnTaker.Deck.TopCard;
+
             //Discard the top card of 1 deck.
+            DecisionSelectLocations = new LocationChoice[] { new LocationChoice(haka.TurnTaker.Deck) };
+
+            UseIncapacitatedAbility(fixer, 2);
+
+            AssertOnTopOfDeck(baronTopCard);
+            AssertOnTopOfDeck(legacyTopCard);
+            AssertInTrash(hakaTopCard);
+            AssertOnTopOfDeck(raTopCard);
+
+
         }
     }
 }
