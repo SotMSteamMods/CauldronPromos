@@ -79,6 +79,46 @@
             }
         }
     ],
+    "Expatriette": [
+        {
+            "identifier": "ExpatrietteCharacter",
+            "promoIdentifier": "UrbanWarfareExpatrietteCharacter",
+            "count": 1,
+            "title": "Expatriette",
+            "promoTitle": "Urban Warfare Expatriette",
+            "body": "Urban Warfare",
+            "icons": [
+                "HasPower",
+                "DrawCardNow",
+                "UsePowerNow"
+            ],
+            "backgroundColor": "9e95aa",
+            "foilBackgroundColor": "9e95aa",
+            "hitpointsColor": "9e95aa",
+            "character": true,
+            "powers": [
+                "Draw a card. You may use a power now."
+            ],
+            "hitpoints": 29,
+            "nemesisIdentifiers": [
+                "Expatriette"
+            ],
+            "incapacitatedAbilities": [
+                "One hero may use a power now.",
+                "Destroy a target with 1 HP.",
+                "Select a hero. The next time that hero uses a power, they also deal 1 projectile damage to 1 target."
+            ],
+            "flippedIcons": [
+                "UsePowerNow",
+                "DestroyTarget",
+                "DealDamageProjectile"
+            ],
+            "complexity": 2,
+            "openingLines": {
+                "default": "-"
+            }
+        }
+    ],
     "MrFixer": [
         {
             "identifier": "MrFixerCharacter",
