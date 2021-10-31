@@ -16,6 +16,6 @@
 	"namespace": "CauldronPromos",
 	"dll": "CauldronPromos.dll",
 	"variants": {
-		"MrFixer": [ "EnlightenedMrFixerCharacter" ]
+		"MrFixer": [ "EnlightenedMrFixerCharacter", "NorthernWindMrFixerCharacter" ]
 	}
 }

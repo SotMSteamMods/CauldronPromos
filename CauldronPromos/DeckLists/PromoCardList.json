@@ -1,42 +1,80 @@
 ﻿{
-  "MrFixer": [
-    {
-        "identifier": "MrFixerCharacter",
-        "promoIdentifier": "EnlightenedMrFixerCharacter",
-        "count": 1,
-        "title": "Mr. Fixer",
-        "promoTitle": "Enlightened Mr. Fixer",
-        "body": "Chi Strike",
-        "icons": [
-            "HasPower",
-            "DealDamageRadiant",
-            "Discard"
-        ],
-        "backgroundColor": "EB8A77",
-        "foilBackgroundColor": "EB8A77",
-        "hitpointsColor": "EB8A77",
-        "character": true,
-        "powers": [
-            "{MrFixer} deals 1 target 2 radiant damage. One player discards a card."
-        ],
-        "hitpoints": 27,
-        "nemesisIdentifiers": [
-            "MrFixer"
-        ],
-        "incapacitatedAbilities": [
-            "One player may play a card now.",
-            "Destroy a target with 2 or fewer HP.",
-            "Discard the top card of 1 deck."
-        ],
-        "flippedIcons": [
-            "PlayCardNow",
-            "Destroy",
-            "Discard"
-        ],
-        "complexity": 2,
-        "openingLines": {
-            "default": "-"
+    "MrFixer": [
+        {
+            "identifier": "MrFixerCharacter",
+            "promoIdentifier": "EnlightenedMrFixerCharacter",
+            "count": 1,
+            "title": "Mr. Fixer",
+            "promoTitle": "Enlightened Mr. Fixer",
+            "body": "Chi Strike",
+            "icons": [
+                "HasPower",
+                "DealDamageRadiant",
+                "Discard"
+            ],
+            "backgroundColor": "EB8A77",
+            "foilBackgroundColor": "EB8A77",
+            "hitpointsColor": "EB8A77",
+            "character": true,
+            "powers": [
+                "{MrFixer} deals 1 target 2 radiant damage. One player discards a card."
+            ],
+            "hitpoints": 27,
+            "nemesisIdentifiers": [
+                "MrFixer"
+            ],
+            "incapacitatedAbilities": [
+                "One player may play a card now.",
+                "Destroy a target with 2 or fewer HP.",
+                "Discard the top card of 1 deck."
+            ],
+            "flippedIcons": [
+                "PlayCardNow",
+                "Destroy",
+                "Discard"
+            ],
+            "complexity": 2,
+            "openingLines": {
+                "default": "-"
+            }
+        },
+        {
+            "identifier": "MrFixerCharacter",
+            "promoIdentifier": "NorthernWindMrFixerCharacter",
+            "count": 1,
+            "title": "Mr. Fixer",
+            "promoTitle": "Northern Wind Mr. Fixer",
+            "body": "Wind Strike",
+            "icons": [
+                "HasPower",
+                "DealDamageCold",
+                "Indestructible"
+            ],
+            "backgroundColor": "86bae4",
+            "foilBackgroundColor": "86bae4",
+            "hitpointsColor": "86bae4",
+            "character": true,
+            "powers": [
+                "{MrFixer} deals 1 target 0 cold damage. One of your non-character cards in play becomes indestructible until your next power phase."
+            ],
+            "hitpoints": 26,
+            "nemesisIdentifiers": [
+                "MrFixer"
+            ],
+            "incapacitatedAbilities": [
+                "One player may use a power now.",
+                "Destroy an environment card.",
+                "Put a card in a trash pile under its associated deck."
+            ],
+            "flippedIcons": [
+                "UsePowerNow",
+                "DestroyEnvironment",
+                "Manipulate"
+            ],
+            "complexity": 2,
+            "openingLines": {
+                "default": "-"
+            }
         }
-    }
-  ]
+    ]
 }
