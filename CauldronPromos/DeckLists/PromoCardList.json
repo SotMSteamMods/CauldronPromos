@@ -1,4 +1,84 @@
 ﻿{
+    "AbsoluteZero": [
+        {
+            "identifier": "AbsoluteZeroCharacter",
+            "promoIdentifier": "NitroBoostAbsoluteZeroCharacter",
+            "count": 1,
+            "title": "Absolute Zero",
+            "promoTitle": "Nitro Boost Absolute Zero",
+            "body": "Nitro Boost",
+            "icons": [
+                "HasPower",
+                "PlayCardNow",
+                "DealDamageFire",
+                "DealDamageCold"
+            ],
+            "backgroundColor": "86879b",
+            "foilBackgroundColor": "86879b",
+            "hitpointsColor": "86879b",
+            "character": true,
+            "powers": [
+                "Play a card. {AbsoluteZero} deals himself 1 fire and 1 cold damage."
+            ],
+            "hitpoints": 28,
+            "nemesisIdentifiers": [
+                "AbsoluteZero"
+            ],
+            "incapacitatedAbilities": [
+                "One player may use a power now.",
+                "Select a hero. Increase the next damage dealt by that hero by 2.",
+                "Destroy a target with 1 HP."
+            ],
+            "flippedIcons": [
+                "UsePowerNow",
+                "IncreaseDamageDealt",
+                "Destroy"
+            ],
+            "complexity": 3,
+            "openingLines": {
+                "default": "-"
+            }
+        }
+    ],
+    "Bunker": [
+        {
+            "identifier": "BunkerCharacter",
+            "promoIdentifier": "SiegeBreakerBunkerCharacter",
+            "count": 1,
+            "title": "Bunker",
+            "promoTitle": "Siege Breaker Bunker",
+            "body": "Deploy",
+            "icons": [
+                "HasPower",
+                "Manipulate"
+            ],
+            "backgroundColor": "88869b",
+            "foilBackgroundColor": "88869b",
+            "hitpointsColor": "88869b",
+            "character": true,
+            "powers": [
+                "Reveal the top 2 cards of your deck. Put 1 into play and 1 into your trash."
+            ],
+            "hitpoints": 28,
+            "nemesisIdentifiers": [
+                "Bunker"
+            ],
+            "incapacitatedAbilities": [
+                "One player may play a card now.",
+                "Select a hero. Prevent the next damage dealt to tat hero",
+                "One player may take a card from their trash into their hand."
+            ],
+            "flippedIcons": [
+                "PlayCardNow",
+                "CancelledDamageGreen",
+                "Manipulate"
+            ],
+            "complexity": 2,
+            "openingLines": {
+                "default": "-"
+            }
+        }
+    ],
     "MrFixer": [
         {
             "identifier": "MrFixerCharacter",
@@ -76,46 +156,6 @@
                 "default": "-"
             }
         }
-    ],
-    "AbsoluteZero": [
-        {
-            "identifier": "AbsoluteZeroCharacter",
-            "promoIdentifier": "NitroBoostAbsoluteZeroCharacter",
-            "count": 1,
-            "title": "Absolute Zero",
-            "promoTitle": "Nitro Boost Absolute Zero",
-            "body": "Nitro Boost",
-            "icons": [
-                "HasPower",
-                "PlayCardNow",
-                "DealDamageFire",
-                "DealDamageCold"
-            ],
-            "backgroundColor": "86879b",
-            "foilBackgroundColor": "86879b",
-            "hitpointsColor": "86879b",
-            "character": true,
-            "powers": [
-                "Play a card. {AbsoluteZero} deals himself 1 fire and 1 cold damage."
-            ],
-            "hitpoints": 28,
-            "nemesisIdentifiers": [
-                "AbsoluteZero"
-            ],
-            "incapacitatedAbilities": [
-                "One player may use a power now.",
-                "Select a hero. Increase the next damage dealt by that hero by 2.",
-                "Destroy a target with 1 HP."
-            ],
-            "flippedIcons": [
-                "UsePowerNow",
-                "IncreaseDamageDealt",
-                "Destroy"
-            ],
-            "complexity": 3,
-            "openingLines": {
-                "default": "-"
-            }
-        }
     ]
+
 }
