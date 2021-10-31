@@ -76,5 +76,46 @@
                 "default": "-"
             }
         }
+    ],
+    "AbsoluteZero": [
+        {
+            "identifier": "AbsoluteZeroCharacter",
+            "promoIdentifier": "NitroBoostAbsoluteZeroCharacter",
+            "count": 1,
+            "title": "Absolute Zero",
+            "promoTitle": "Nitro Boost Absolute Zero",
+            "body": "Nitro Boost",
+            "icons": [
+                "HasPower",
+                "PlayCardNow",
+                "DealDamageFire",
+                "DealDamageCold"
+            ],
+            "backgroundColor": "86879b",
+            "foilBackgroundColor": "86879b",
+            "hitpointsColor": "86879b",
+            "character": true,
+            "powers": [
+                "Play a card. {AbsoluteZero} deals himself 1 fire and 1 cold damage."
+            ],
+            "hitpoints": 28,
+            "nemesisIdentifiers": [
+                "AbsoluteZero"
+            ],
+            "incapacitatedAbilities": [
+                "One player may use a power now.",
+                "Select a hero. Increase the next damage dealt by that hero by 2.",
+                "Destroy a target with 1 HP."
+            ],
+            "flippedIcons": [
+                "UsePowerNow",
+                "IncreaseDamageDealt",
+                "Destroy"
+            ],
+            "complexity": 3,
+            "openingLines": {
+                "default": "-"
+            }
+        }
     ]
 }
