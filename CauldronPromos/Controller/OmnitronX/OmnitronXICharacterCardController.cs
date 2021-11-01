@@ -77,8 +77,6 @@ namespace CauldronPromos.OmnitronX
             Game.Journal.RecordCardProperties(CharacterCard, OverclockedTurnTakerKey, Game.ActiveTurnTaker);
             IEnumerable<TurnPhase> turnPhases = selectedCards.Select(c => c.Owner.TurnPhases.Where((TurnPhase phase) => phase.IsStart).First()).Distinct();
             IEnumerable<PhaseChangeAction> fakeStarts = turnPhases.Select(tp => new PhaseChangeAction(GetCardSource(), null, tp, tp.IsEphemeral));
-            //TurnPhase turnPhase = GetOriginalOwner(CardWithoutReplacements).TurnPhases.Where((TurnPhase phase) => phase.IsStart).First();
-            //PhaseChangeAction fakeStart = new PhaseChangeAction(GetCardSource(), null, turnPhase, turnPhase.IsEphemeral);
             FindTriggersWhere((ITrigger t) => !_triggersChanged.Contains(t) && selectedCards.Contains(t.CardSource.Card ) && t is PhaseChangeTrigger && fakeStarts.Any(fs => t.DoesMatchTypeAndCriteria(fs))).ForEach(delegate (ITrigger t)
             {
                 ApplyChangeTo((PhaseChangeTrigger)t);
