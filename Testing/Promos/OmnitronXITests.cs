@@ -119,6 +119,29 @@ namespace CauldronPromosTests
         }
 
         [Test()]
+        public void TestOmnitronXIInnatePower_OmniIV()
+        {
+            SetupGameController("BaronBlade", "OmnitronX/CauldronPromos.OmnitronXICharacter", "Legacy", "Haka", "Ra", "OmnitronIV");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            GoToPlayCardPhase(omnix);
+            Card focusedPlasmaCannon = PlayCard("FocusedPlasmaCannon");
+            Card conveyorPanels = PlayCard("ConveyorPanels");
+            Card partialOmniDrone = PutOnDeck("PartialOmniDrone");
+
+            GoToUsePowerPhase(omnix);
+            //Select 1 component in play. That component's start of turn effects act at the end of this turn as well.
+            DecisionSelectCards = new Card[] { conveyorPanels};
+            UsePower(omnix);
+
+            PrintSpecialStringsForCard(omnix.CharacterCard);
+
+            GoToEndOfTurn(omnix);
+            AssertInPlayArea(env, partialOmniDrone);
+        }
+
+        [Test()]
         public void TestOmnitronXIIncap1()
         {
             SetupGameController("BaronBlade", "OmnitronX/CauldronPromos.OmnitronXICharacter", "Legacy", "Haka", "Ra", "Megalopolis");
