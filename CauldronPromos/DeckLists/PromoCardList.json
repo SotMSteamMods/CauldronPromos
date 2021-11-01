@@ -196,6 +196,45 @@
                 "default": "-"
             }
         }
+    ],
+    "OmnitronX": [
+        {
+            "identifier": "OmnitronXCharacter",
+            "promoIdentifier": "OmnitronXICharacter",
+            "count": 1,
+            "title": "Omnitron X",
+            "promoTitle": "Omnitron XI",
+            "body": "Overclock",
+            "icons": [
+                "HasPower",
+                "EndOfTurnAction"
+            ],
+            "backgroundColor": "bf333f",
+            "foilBackgroundColor": "bf333f",
+            "hitpointsColor": "bf333f",
+            "character": true,
+            "powers": [
+                "Select 1 component in play. That component's start of turn effects act at the end of this turn as well."
+            ],
+            "hitpoints": 29,
+            "nemesisIdentifiers": [
+                "OmnitronX"
+            ],
+            "incapacitatedAbilities": [
+                "Destroy an environment card.",
+                "The target with the lowest HP deals 1 target 1 irreducible fire damage.",
+                "Select a deck and put its top card into play."
+            ],
+            "flippedIcons": [
+                "DestroyEnvironment",
+                "DealDamageFire",
+                "Manipulate"
+            ],
+            "complexity": 2,
+            "openingLines": {
+                "default": "-"
+            }
+        }
     ]
 
 }

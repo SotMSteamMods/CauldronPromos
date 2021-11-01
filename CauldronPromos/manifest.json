@@ -19,6 +19,7 @@
 		"AbsoluteZero": [ "NitroBoostAbsoluteZeroCharacter" ],
 		"Bunker": [ "SiegeBreakerBunkerCharacter" ],
 		"Expatriette":  ["UrbanWarfareExpatrietteCharacter"],
-		"MrFixer": [ "EnlightenedMrFixerCharacter", "NorthernWindMrFixerCharacter" ]
+		"MrFixer": [ "EnlightenedMrFixerCharacter", "NorthernWindMrFixerCharacter" ],
+		"OmnitronX":  ["OmnitronXICharacter"]
 	}
 }
