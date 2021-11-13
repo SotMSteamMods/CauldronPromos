@@ -1,0 +1,159 @@
+{
+  "frames": {
+    "EnlightenedMrFixerCharacter.jpg": {
+      "frame": {
+        "x": 1,
+        "y": 1,
+        "w": 330,
+        "h": 260
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 330,
+        "h": 260
+      },
+      "sourceSize": {
+        "w": 330,
+        "h": 260
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NitroBoostAbsoluteZeroCharacter.jpg": {
+      "frame": {
+        "x": 1,
+        "y": 263,
+        "w": 330,
+        "h": 260
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 330,
+        "h": 260
+      },
+      "sourceSize": {
+        "w": 330,
+        "h": 260
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NorthernWindMrFixerCharacter.jpg": {
+      "frame": {
+        "x": 333,
+        "y": 1,
+        "w": 330,
+        "h": 260
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 330,
+        "h": 260
+      },
+      "sourceSize": {
+        "w": 330,
+        "h": 260
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "OmnitronXICharacter.jpg": {
+      "frame": {
+        "x": 1,
+        "y": 525,
+        "w": 330,
+        "h": 260
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 330,
+        "h": 260
+      },
+      "sourceSize": {
+        "w": 330,
+        "h": 260
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "SiegeBreakerBunkerCharacter.jpg": {
+      "frame": {
+        "x": 333,
+        "y": 263,
+        "w": 330,
+        "h": 260
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 330,
+        "h": 260
+      },
+      "sourceSize": {
+        "w": 330,
+        "h": 260
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "UrbanWarfareExpatrietteCharacter.jpg": {
+      "frame": {
+        "x": 665,
+        "y": 1,
+        "w": 330,
+        "h": 260
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 330,
+        "h": 260
+      },
+      "sourceSize": {
+        "w": 330,
+        "h": 260
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "HeroLogos0.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 1024,
+      "h": 1024
+    },
+    "scale": 1
+  }
+}
