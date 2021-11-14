@@ -36,7 +36,7 @@
             ],
             "complexity": 3,
             "openingLines": {
-                "default": "-"
+                "default": "Tempers are running hot. Time to cool things down!"
             }
         }
     ],
@@ -75,7 +75,7 @@
             ],
             "complexity": 2,
             "openingLines": {
-                "default": "-"
+                "default": "Work together, team! Think tactically and protect your teammates."
             }
         }
     ],
@@ -115,7 +115,7 @@
             ],
             "complexity": 2,
             "openingLines": {
-                "default": "-"
+                "default": "You're in my crosshairs. Can't imagine this will go well for you."
             }
         }
     ],
@@ -155,7 +155,7 @@
             ],
             "complexity": 2,
             "openingLines": {
-                "default": "-"
+                "default": "My tools are weapons in my hands. This fight will end swiftly."
             }
         },
         {
@@ -193,7 +193,7 @@
             ],
             "complexity": 2,
             "openingLines": {
-                "default": "-"
+                "default": "My tools are weapons in my hands. This fight will end swiftly."
             }
         }
     ],
@@ -232,7 +232,7 @@
             ],
             "complexity": 2,
             "openingLines": {
-                "default": "-"
+                "default": "systems online. temporal recalibration: complete. weapons powering up."
             }
         }
     ]
