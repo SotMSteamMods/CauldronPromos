@@ -10,6 +10,7 @@ using Troschuetz.Random.Generators;
 using System.IO;
 using Handelabra;
 using CauldronTests;
+using System.Text.RegularExpressions;
 
 namespace CauldronPromosTests
 {
@@ -109,9 +110,17 @@ namespace CauldronPromosTests
                     name = heroDefinition.Name;
                     if (promoId != "")
                     {
-                        var promo = heroDefinition.PromoCardDefinitions.Where(def => def.PromoIdentifier == promoId).First();
-                        promoIdentifiers[identifier] = promo.PromoIdentifier;
-                        name = promo.PromoTitle;
+                        var promo = heroDefinition.PromoCardDefinitions.Where(def => def.PromoIdentifier == promoId).FirstOrDefault();
+                        if (promo != null)
+                        {
+                            promoIdentifiers[identifier] = promo.PromoIdentifier;
+                            name = promo.PromoTitle;
+                        } else
+                        {
+                            promoIdentifiers[identifier] = promoId;
+                            string strippedName = promoId.Split('.')[1].Replace("Character", string.Empty);
+                            name = Regex.Replace(strippedName, "(\\B[A-Z])", " $1");
+                        }
                     }
                     useHeroes.Remove(fullIdentifier);
                 }
@@ -215,9 +224,18 @@ namespace CauldronPromosTests
                     name = heroDefinition.Name;
                     if (promoId != "")
                     {
-                        var promo = heroDefinition.PromoCardDefinitions.Where(def => def.PromoIdentifier == promoId).First();
-                        promoIdentifiers[identifier] = promo.PromoIdentifier;
-                        name = promo.PromoTitle;
+                        var promo = heroDefinition.PromoCardDefinitions.Where(def => def.PromoIdentifier == promoId).FirstOrDefault();
+                        if (promo != null)
+                        {
+                            promoIdentifiers[identifier] = promo.PromoIdentifier;
+                            name = promo.PromoTitle;
+                        }
+                        else
+                        {
+                            promoIdentifiers[identifier] = promoId;
+                            string strippedName = promoId.Split('.')[1].Replace("Character", string.Empty);
+                            name = Regex.Replace(strippedName, "(\\B[A-Z])", " $1");
+                        }
                     }
                     useHeroes.Remove(fullIdentifier);
                 }

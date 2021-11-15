@@ -11,7 +11,7 @@ using CauldronPromos.Expatriette;
 namespace CauldronPromosTests
 {
     [TestFixture()]
-    public class UrbanWarfareExpatrietteTests : CauldronBaseTest
+    public class UrbanWarfareExpatrietteTests : RandomGameTest
     {
 
         private void SetupIncap(TurnTakerController villain)
@@ -111,5 +111,56 @@ namespace CauldronPromosTests
             UsePower(ra);
             QuickHPCheck(-3);
         }
+
+        #region Random Tests
+        [Test]
+        public void TestUrbanWarfareExpatrietteRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "Expatriette/CauldronPromos.UrbanWarfareExpatrietteCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestUrbanWarfareExpatrietteRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "Expatriette/CauldronPromos.UrbanWarfareExpatrietteCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestUrbanWarfareExpatrietteAndGuiseRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "Expatriette/CauldronPromos.UrbanWarfareExpatrietteCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestUrbanWarfareExpatrietteAndGuiseRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "Expatriette/CauldronPromos.UrbanWarfareExpatrietteCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestUrbanWarfareExpatrietteRandomOblivAeonGame_Random()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(false,
+                useHeroes: new List<string> { "Expatriette/CauldronPromos.UrbanWarfareExpatrietteCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestUrbanWarfareExpatrietteRandomOblivAeonGame_Reasonable()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(true,
+                useHeroes: new List<string> { "Expatriette/CauldronPromos.UrbanWarfareExpatrietteCharacter" });
+            RunGame(gameController);
+        }
+
+        #endregion
     }
 }

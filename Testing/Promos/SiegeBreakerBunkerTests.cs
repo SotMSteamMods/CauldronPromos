@@ -11,7 +11,7 @@ using CauldronPromos.Bunker;
 namespace CauldronPromosTests
 {
     [TestFixture()]
-    public class SiegeBreakerBunkerTests : CauldronBaseTest
+    public class SiegeBreakerBunkerTests : RandomGameTest
     {
 
         private void SetupIncap(TurnTakerController villain)
@@ -110,5 +110,56 @@ namespace CauldronPromosTests
 
 
         }
+
+        #region Random Tests
+        [Test]
+        public void TestSiegeBreakerBunkerRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "Bunker/CauldronPromos.SiegeBreakerBunkerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestSiegeBreakerBunkerRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "Bunker/CauldronPromos.SiegeBreakerBunkerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestSiegeBreakerBunkerAndGuiseRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "Bunker/CauldronPromos.SiegeBreakerBunkerCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestSiegeBreakerBunkerAndGuiseRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "Bunker/CauldronPromos.SiegeBreakerBunkerCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestSiegeBreakerBunkerRandomOblivAeonGame_Random()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(false,
+                useHeroes: new List<string> { "Bunker/CauldronPromos.SiegeBreakerBunkerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestSiegeBreakerBunkerRandomOblivAeonGame_Reasonable()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(true,
+                useHeroes: new List<string> { "Bunker/CauldronPromos.SiegeBreakerBunkerCharacter" });
+            RunGame(gameController);
+        }
+
+        #endregion
     }
 }

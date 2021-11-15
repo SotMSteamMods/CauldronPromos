@@ -11,7 +11,7 @@ using CauldronPromos.OmnitronX;
 namespace CauldronPromosTests
 {
     [TestFixture()]
-    public class OmnitronXITests : CauldronBaseTest
+    public class OmnitronXITests : RandomGameTest
     {
 
         private void SetupIncap(TurnTakerController villain)
@@ -194,5 +194,76 @@ namespace CauldronPromosTests
             AssertInPlayArea(legacy, nextEvolution);
 
         }
+
+        #region Random Tests
+        [Test]
+        public void TestOmnitronXIRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestOmnitronXIAndOmnitronAndOmnitronIVRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useVillain: "Omnitron",
+                useEnvironment: "OmnitronIV",
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestOmnitronXIRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestOmnitronXIAndOmnitronAndOmnitronIVRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useVillain: "Omnitron",
+                useEnvironment: "OmnitronIV",
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestOmnitronXIAndGuiseRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestOmnitronXIAndGuiseRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestOmnitronXIRandomOblivAeonGame_Random()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(false,
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestOmnitronXIRandomOblivAeonGame_Reasonable()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(true,
+                useHeroes: new List<string> { "OmnitronX/CauldronPromos.OmnitronXICharacter" });
+            RunGame(gameController);
+        }
+
+        #endregion
     }
 }

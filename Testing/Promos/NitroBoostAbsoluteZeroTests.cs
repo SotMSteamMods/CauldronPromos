@@ -11,7 +11,7 @@ using CauldronPromos.AbsoluteZero;
 namespace CauldronPromosTests
 {
     [TestFixture()]
-    public class NitroBoostAbsoluteZeroTests : CauldronBaseTest
+    public class NitroBoostAbsoluteZeroTests : RandomGameTest
     {
 
         private void SetupIncap(TurnTakerController villain)
@@ -110,5 +110,56 @@ namespace CauldronPromosTests
             AssertInPlayArea(baron, battalion);
 
         }
+
+        #region Random Tests
+        [Test]
+        public void TestNitroBoostAbsoluteZeroRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "AbsoluteZero/CauldronPromos.NitroBoostAbsoluteZeroCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNitroBoostAbsoluteZeroRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "AbsoluteZero/CauldronPromos.NitroBoostAbsoluteZeroCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNitroBoostAbsoluteZeroAndGuiseRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "AbsoluteZero/CauldronPromos.NitroBoostAbsoluteZeroCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNitroBoostAbsoluteZeroAndGuiseRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "AbsoluteZero/CauldronPromos.NitroBoostAbsoluteZeroCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNitroBoostAbsoluteZeroRandomOblivAeonGame_Random()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(false,
+                useHeroes: new List<string> { "AbsoluteZero/CauldronPromos.NitroBoostAbsoluteZeroCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNitroBoostAbsoluteZeroRandomOblivAeonGame_Reasonable()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(true,
+                useHeroes: new List<string> { "AbsoluteZero/CauldronPromos.NitroBoostAbsoluteZeroCharacter" });
+            RunGame(gameController);
+        }
+
+        #endregion
     }
 }

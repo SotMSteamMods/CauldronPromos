@@ -11,7 +11,7 @@ using CauldronPromos.MrFixer;
 namespace CauldronPromosTests
 {
     [TestFixture()]
-    public class NorthernWindMrFixerTests : CauldronBaseTest
+    public class NorthernWindMrFixerTests : RandomGameTest
     {
 
         private void SetupIncap(TurnTakerController villain)
@@ -122,5 +122,56 @@ namespace CauldronPromosTests
             AssertInTrash(baron, baron1);
 
         }
+
+        #region Random Tests
+        [Test]
+        public void TestNorthernWindMrFixerRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNorthernWindMrFixerRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNorthernWindMrFixerAndGuiseRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNorthernWindMrFixerAndGuiseRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNorthernWindMrFixerRandomOblivAeonGame_Random()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(false,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestNorthernWindMrFixerRandomOblivAeonGame_Reasonable()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(true,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        #endregion
     }
 }

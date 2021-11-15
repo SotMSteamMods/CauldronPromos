@@ -11,7 +11,7 @@ using CauldronPromos.MrFixer;
 namespace CauldronPromosTests
 {
     [TestFixture()]
-    public class EnlightenedMrFixerTests : CauldronBaseTest
+    public class EnlightenedMrFixerTests : RandomGameTest
     {
 
         private void SetupIncap(TurnTakerController villain)
@@ -121,5 +121,56 @@ namespace CauldronPromosTests
 
 
         }
+
+        #region Random Tests
+        [Test]
+        public void TestEnlightenedMrFixerRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestEnlightenedMrFixerRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestEnlightenedMrFixerAndGuiseRandomGame_Random()
+        {
+            GameController gameController = SetupRandomGameController(false,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestEnlightenedMrFixerAndGuiseRandomGame_Reasonable()
+        {
+            GameController gameController = SetupRandomGameController(true,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter", "Guise" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestEnlightenedMrFixerRandomOblivAeonGame_Random()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(false,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        [Test]
+        public void TestEnlightenedMrFixerRandomOblivAeonGame_Reasonable()
+        {
+            GameController gameController = SetupRandomOblivAeonGameController(true,
+                useHeroes: new List<string> { "MrFixer/CauldronPromos.EnlightenedMrFixerCharacter" });
+            RunGame(gameController);
+        }
+
+        #endregion
     }
 }
