@@ -1,0 +1,303 @@
+{
+  "frames": {
+    "EnlightenedMrFixerCharacter.png": {
+      "frame": {
+        "x": 1,
+        "y": 1,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "EnlightenedMrFixerCharacterFlipped.png": {
+      "frame": {
+        "x": 1,
+        "y": 203,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NitroBoostAbsoluteZeroCharacter.png": {
+      "frame": {
+        "x": 403,
+        "y": 1,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NitroBoostAbsoluteZeroCharacterFlipped.png": {
+      "frame": {
+        "x": 1,
+        "y": 405,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NorthernWindMrFixerCharacter.png": {
+      "frame": {
+        "x": 403,
+        "y": 203,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "NorthernWindMrFixerCharacterFlipped.png": {
+      "frame": {
+        "x": 805,
+        "y": 1,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "OmnitronXICharacter.png": {
+      "frame": {
+        "x": 1,
+        "y": 607,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "OmnitronXICharacterFlipped.png": {
+      "frame": {
+        "x": 403,
+        "y": 405,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "SiegeBreakerBunkerCharacter.png": {
+      "frame": {
+        "x": 805,
+        "y": 203,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "SiegeBreakerBunkerCharacterFlipped.png": {
+      "frame": {
+        "x": 1207,
+        "y": 1,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "UrbanWarfareExpatrietteCharacter.png": {
+      "frame": {
+        "x": 1,
+        "y": 809,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "UrbanWarfareExpatrietteCharacterFlipped.png": {
+      "frame": {
+        "x": 403,
+        "y": 607,
+        "w": 400,
+        "h": 200
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 400,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 400,
+        "h": 200
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "EndGameHeroes0.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 2048,
+      "h": 1024
+    },
+    "scale": 1
+  }
+}
