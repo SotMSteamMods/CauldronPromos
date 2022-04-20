@@ -36,6 +36,11 @@ namespace CauldronPromos.OmnitronX
             }
         }
 
+        public override void AddStartOfGameTriggers()
+        {
+            AddOverclockTriggers();
+        }
+
         public override IEnumerator UsePower(int index = 0)
         {
             //Select 1 component in play. That component's start of turn effects act at the end of this turn as well.
@@ -60,7 +65,7 @@ namespace CauldronPromos.OmnitronX
 
             OverclockCards(selectedCards);
 
-            coroutine = GameController.SendMessageAction($"{String.Join(" and ", selectedCards.Select(c => c.Title).ToArray())} {selectedCards.Count().ToString_IsOrAre()} overclocked and will act at the end of {Game.ActiveTurnTaker.Name}'s turn.", Priority.Medium, GetCardSource());
+            coroutine = GameController.SendMessageAction($"{string.Join(" and ", selectedCards.Select(c => c.Title).ToArray())} {selectedCards.Count().ToString_IsOrAre()} overclocked and will act at the end of {Game.ActiveTurnTaker.Name}'s turn.", Priority.Medium, GetCardSource());
             if (UseUnityCoroutines)
             {
                 yield return GameController.StartCoroutine(coroutine);
@@ -75,23 +80,40 @@ namespace CauldronPromos.OmnitronX
         {
             Game.Journal.RecordCardProperties(CharacterCard, OverclockedCardsKey, selectedCards.Select(c => c.Title));
             Game.Journal.RecordCardProperties(CharacterCard, OverclockedTurnTakerKey, Game.ActiveTurnTaker);
+            AddOverclockTriggers();
+        }
+
+        private void AddOverclockTriggers()
+        {
+            ApplyChangesResponse();
+            AddTrigger((PhaseChangeAction p) => p.ToPhase.IsEnd && Game.Journal.GetCardPropertiesTurnTaker(CharacterCard, OverclockedTurnTakerKey) != null && p.ToPhase.TurnTaker == Game.Journal.GetCardPropertiesTurnTaker(CharacterCard, OverclockedTurnTakerKey), p => ApplyChangesResponse(), TriggerType.HiddenLast, TriggerTiming.Before);
+        }
+
+        private IEnumerator ApplyChangesResponse()
+        {
+            IEnumerable<Card> selectedCards = FindCardsWhere(c => Game.Journal.GetCardPropertiesStringList(CharacterCard, OverclockedCardsKey).Contains(c.Title) && c.IsInPlayAndHasGameText);
+            TurnTaker turnTakerToUse = Game.Journal.GetCardPropertiesTurnTaker(CharacterCard, OverclockedTurnTakerKey);
             IEnumerable<TurnPhase> turnPhases = selectedCards.Select(c => c.Owner.TurnPhases.Where((TurnPhase phase) => phase.IsStart).First()).Distinct();
             IEnumerable<PhaseChangeAction> fakeStarts = turnPhases.Select(tp => new PhaseChangeAction(GetCardSource(), null, tp, tp.IsEphemeral));
-            FindTriggersWhere((ITrigger t) => !_triggersChanged.Contains(t) && selectedCards.Contains(t.CardSource.Card ) && t is PhaseChangeTrigger && fakeStarts.Any(fs => t.DoesMatchTypeAndCriteria(fs))).ForEach(delegate (ITrigger t)
+            FindTriggersWhere((ITrigger t) => !_triggersChanged.Contains(t) && selectedCards.Contains(t.CardSource.Card) && t is PhaseChangeTrigger && fakeStarts.Any(fs => t.DoesMatchTypeAndCriteria(fs))).ForEach(delegate (ITrigger t)
             {
-                ApplyChangeTo((PhaseChangeTrigger)t);
+                ApplyChangeTo((PhaseChangeTrigger)t, turnTakerToUse);
             });
+
             AddEndOfTurnTrigger(tt => tt == Game.ActiveTurnTaker, RestoreTriggers, TriggerType.HiddenLast);
-            foreach(CardController cc in selectedCards.Select(c => FindCardController(c)))
+            foreach (CardController cc in selectedCards.Select(c => FindCardController(c)))
             {
                 cc.AddBeforeLeavesPlayActions(RestoreTriggers);
             }
+            yield return DoNothing();
         }
 
-        private void ApplyChangeTo(PhaseChangeTrigger trigger)
+        private void ApplyChangeTo(PhaseChangeTrigger trigger, TurnTaker turnTakerToUse)
         {
-            _alternative = (PhaseChangeAction p) => p.ToPhase.TurnTaker == Game.ActiveTurnTaker && p.ToPhase.IsEnd;
+            _alternative = (PhaseChangeAction p) => p.ToPhase.TurnTaker == turnTakerToUse && p.ToPhase.IsEnd;
             trigger.AddAlternativeCriteria(_alternative);
+
+
             _triggersChanged.Add(trigger);
         }
 
