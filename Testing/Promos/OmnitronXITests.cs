@@ -93,6 +93,67 @@ namespace CauldronPromosTests
         }
 
         [Test()]
+        [Sequential]
+        public void TestOmnitronXIInnatePower_OutOfTurn_OneComponent([Values("FocusedPlasmaCannon", "GaussianCoilBlaster", "ElectroDeploymentUnit", "InnervationRay")] string component)
+        {
+            SetupGameController("BaronBlade", "OmnitronX/CauldronPromos.OmnitronXICharacter", "Legacy/AmericasGreatestLegacyCharacter", "Haka", "Ra", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            GoToPlayCardPhase(omnix);
+            Card componentCard = PlayCard(component);
+
+
+            GoToUsePowerPhase(legacy);
+            //Select 1 component in play. That component's start of turn effects act at the end of this turn as well.
+            UsePower(legacy);
+
+            string expectedSpecialString = $"{componentCard.Title} is overclocked and will act at the end of {legacy.TurnTaker.Name}'s turn.";
+
+            PrintSpecialStringsForCard(omnix.CharacterCard);
+            AssertCardSpecialString(omnix.CharacterCard, 0, expectedSpecialString);
+            GoToEndOfTurn(legacy);
+            PrintSpecialStringsForCard(omnix.CharacterCard);
+            AssertNoSpecialStrings(omnix.CharacterCard);
+
+
+        }
+
+        [Test()]
+        [Sequential]
+        public void TestOmnitronXIInnatePower_OutOfTurn_OneComponent_WithSaveAndLoad([Values("FocusedPlasmaCannon", "GaussianCoilBlaster", "ElectroDeploymentUnit", "InnervationRay")] string component)
+        {
+            SetupGameController("BaronBlade", "OmnitronX/CauldronPromos.OmnitronXICharacter", "Legacy/AmericasGreatestLegacyCharacter", "Haka", "Ra", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            GoToPlayCardPhase(omnix);
+            Card componentCard = PlayCard(component);
+            PrintTriggers();
+
+
+            GoToUsePowerPhase(legacy);
+            //Select 1 component in play. That component's start of turn effects act at the end of this turn as well.
+            UsePower(legacy);
+
+            string expectedSpecialString = $"{componentCard.Title} is overclocked and will act at the end of {legacy.TurnTaker.Name}'s turn.";
+
+            PrintSpecialStringsForCard(omnix.CharacterCard);
+            AssertCardSpecialString(omnix.CharacterCard, 0, expectedSpecialString);
+            PrintTriggers();
+            GoToDrawCardPhase(legacy);
+            PrintSeparator("SAVING AND LOADING");
+            SaveAndLoad();
+            PrintTriggers();
+
+            GoToEndOfTurn(legacy);
+            PrintSpecialStringsForCard(omnix.CharacterCard);
+            PrintTriggers();
+            AssertNoSpecialStrings(omnix.CharacterCard);
+
+        }
+
+        [Test()]
         public void TestOmnitronXIInnatePower_Guise()
         {
             SetupGameController("BaronBlade", "OmnitronX/CauldronPromos.OmnitronXICharacter", "Legacy", "Guise/CompletionistGuiseCharacter", "Ra", "Megalopolis");
