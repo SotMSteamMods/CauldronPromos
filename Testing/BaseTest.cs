@@ -99,6 +99,9 @@ namespace Handelabra.Sentinels.UnitTest
 
         private IEnumerable<Card> _includedCardsInNextDecision;
         private IEnumerable<Card> _notIncludedCardsInNextDecision;
+        private IEnumerable<IEnumerable<Card>> _includedCardsInNextDecisions;
+        private IEnumerable<IEnumerable<Card>> _notIncludedCardsInNextDecisions;
+        private int CardsInNextDecisionsIndex { get; set; }
         private bool _expectedMessageWasShown;
 
         private IEnumerable<TurnTaker> _includedTurnTakersInNextDecision;
@@ -353,6 +356,9 @@ namespace Handelabra.Sentinels.UnitTest
             DecisionAmbiguousCardAtIndices = null;
             DecisionAmbiguousCardAtIndicesIndex = 0;
             _includedCardsInNextDecision = null;
+            _includedCardsInNextDecisions = null;
+            _notIncludedCardsInNextDecisions = null;
+            CardsInNextDecisionsIndex = 0;
             _notIncludedCardsInNextDecision = null;
             _includedPowersInNextDecision = null;
             _notIncludedPowersInNextDecision = null;
@@ -693,6 +699,28 @@ namespace Handelabra.Sentinels.UnitTest
                     {
                         _notIncludedCardsInNextDecision.ForEach(e => Assert.IsFalse(selectCardDecision.Choices.Contains(e), "SelectCardDecision should not include: " + e.Title + ". (Choices: " + selectCardDecision.Choices.Select(c => c.Title).ToCommaList() + ")"));
                         _notIncludedCardsInNextDecision = null;
+                    }
+
+
+                    int minElementsInDecisionList = 0; ;
+                    if(_includedCardsInNextDecisions != null)
+                    {
+                        minElementsInDecisionList = _includedCardsInNextDecisions.Count();
+                        _includedCardsInNextDecisions.ElementAt(CardsInNextDecisionsIndex).ForEach(e => Assert.IsTrue(selectCardDecision.Choices.Contains(e), "SelectCardDecision did not include: " + e.Title + "."));
+                    }
+
+                    if(_notIncludedCardsInNextDecisions != null)
+                    {
+                        minElementsInDecisionList = Math.Min(minElementsInDecisionList, _notIncludedCardsInNextDecisions.Count());
+                        _notIncludedCardsInNextDecisions.ElementAt(CardsInNextDecisionsIndex).ForEach(e => Assert.IsFalse(selectCardDecision.Choices.Contains(e), "SelectCardDecision should not include: " + e.Title + ". (Choices: " + selectCardDecision.Choices.Select(c => c.Title).ToCommaList() + ")"));
+                    }
+
+                    if(_includedCardsInNextDecisions != null || _notIncludedCardsInNextDecisions != null)
+                    {
+                        if (minElementsInDecisionList - 1 > CardsInNextDecisionsIndex)
+                        {
+                            CardsInNextDecisionsIndex++;
+                        }
                     }
 
                     if (selectCardDecision.Choices.Count() == 1 && !selectCardDecision.IsOptional)
@@ -3648,6 +3676,19 @@ namespace Handelabra.Sentinels.UnitTest
             if (notIncluded != null)
             {
                 _notIncludedCardsInNextDecision = notIncluded;
+            }
+        }
+
+        protected void AssertNextDecisionsChoices(IEnumerable<IEnumerable<Card>> included = null, IEnumerable<IEnumerable<Card>> notIncluded = null)
+        {
+            if (included != null)
+            {
+                _includedCardsInNextDecisions = included;
+            }
+
+            if (notIncluded != null)
+            {
+                _notIncludedCardsInNextDecisions = notIncluded;
             }
         }
 
