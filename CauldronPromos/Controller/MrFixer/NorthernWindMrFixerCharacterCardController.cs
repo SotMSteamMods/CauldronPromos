@@ -33,7 +33,7 @@ namespace CauldronPromos.MrFixer
 
             //One of your non-character cards in play becomes indestructible until your next power phase.
             List<SelectCardDecision> storedResults = new List<SelectCardDecision>();
-            coroutine = GameController.SelectCardAndStoreResults(HeroTurnTakerController, SelectionType.Custom, new LinqCardCriteria(c => c.IsInPlayAndHasGameText && c.Owner == TurnTaker && !c.IsCharacter, "non-character"), storedResults, false, cardSource: GetCardSource());
+            coroutine = GameController.SelectCardAndStoreResults(HeroTurnTakerController, SelectionType.Custom, new LinqCardCriteria(c => c.IsInPlayAndHasGameText && c.Owner == TurnTaker && !c.IsCharacter && !c.IsOneShot, "non-character"), storedResults, false, cardSource: GetCardSource());
             if (UseUnityCoroutines)
             {
                 yield return GameController.StartCoroutine(coroutine);

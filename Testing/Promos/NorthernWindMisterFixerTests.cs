@@ -66,6 +66,63 @@ namespace CauldronPromosTests
         }
 
         [Test()]
+        public void TestNorthernWindMrFixerInnatePower_GuiseCopies()
+        {
+            SetupGameController("BaronBlade", "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter", "Guise", "Haka", "Ra", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            GoToPlayCardPhase(fixer);
+            Card pipeWrench = PlayCard("PipeWrench");
+
+            GoToPlayCardPhase(guise);
+            Card blatantReference = PlayCard("BlatantReference");
+            Card guiseTheBarbarian = PlayCard("GuiseTheBarbarian");
+
+            Card iCanDoThatToo = GetCard("ICanDoThatToo");
+
+
+            //Mr Fixer deals 1 target 0 cold damage. One of your non-character cards in play becomes indestructible until your next power phase
+            DecisionSelectPowers = new Card[] { fixer.CharacterCard };
+            DecisionSelectCards = new Card[] { baron.CharacterCard, guiseTheBarbarian };
+
+            AssertNextDecisionsChoices(included: new List<IEnumerable<Card>>()
+            {
+                new List<Card>()
+                {
+                    fixer.CharacterCard, guise.CharacterCard, haka.CharacterCard, ra.CharacterCard
+                },
+                new List<Card>()
+                {
+                    blatantReference, guiseTheBarbarian
+                },
+                                new List<Card>()
+                {
+                    baron.CharacterCard, fixer.CharacterCard, guise.CharacterCard, haka.CharacterCard, ra.CharacterCard
+                }
+
+            }, notIncluded: new List<IEnumerable<Card>>()
+            {
+                new List<Card>()
+                {
+                },
+                new List<Card>()
+                {
+                    iCanDoThatToo, guise.CharacterCard
+                },
+                new List<Card>()
+                {
+                }
+
+            });
+
+            PlayCard(iCanDoThatToo);
+
+
+
+        }
+
+        [Test()]
         public void TestNorthernWindMrFixerIncap1()
         {
             SetupGameController("BaronBlade", "MrFixer/CauldronPromos.NorthernWindMrFixerCharacter", "Legacy", "Haka", "Ra", "Megalopolis");
