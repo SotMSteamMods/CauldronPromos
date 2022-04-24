@@ -5,7 +5,7 @@
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
 	<Deterministic>true</Deterministic>
 	<DebugType>pdbonly</DebugType>
-	<Version>0.2.0</Version>
+	<Version>0.2.1</Version>
 	<Authors>CauldronPromos Dev. Team</Authors>
 	<Description>The Cauldron Promos Fan Expansion for the Sentinels of the Multiverse Digital Card Game.</Description>
 	<Copyright>All rights reserved, 2021-2022</Copyright>
@@ -15,6 +15,7 @@
 	<NeutralLanguage>en</NeutralLanguage>
 	<AssemblyName>CauldronPromos</AssemblyName>
 	<RootNamespace>CauldronPromos</RootNamespace>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,10 @@
     <None Include="..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 
