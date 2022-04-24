@@ -154,7 +154,7 @@ namespace CauldronPromosTests
         }
 
         [Test()]
-        public void TestOmnitronXIInnatePower_Guise()
+        public void TestOmnitronXIInnatePower_CompletionistGuise()
         {
             SetupGameController("BaronBlade", "OmnitronX/CauldronPromos.OmnitronXICharacter", "Legacy", "Guise/CompletionistGuiseCharacter", "Ra", "Megalopolis");
             StartGame();
@@ -171,6 +171,34 @@ namespace CauldronPromosTests
             DecisionSelectCards = new Card[] { omnix.CharacterCard, focusedPlasmaCannon, baron.CharacterCard };
             DecisionSelectFunction = 0;
             UsePower(guise);
+
+            QuickHPStorage(baron);
+            GoToEndOfTurn(guise);
+            QuickHPCheck(-2);
+
+
+        }
+
+        [Test()]
+        public void TestOmnitronXIInnatePower_Guise()
+        {
+            SetupGameController("BaronBlade", "OmnitronX/CauldronPromos.OmnitronXICharacter", "Legacy", "Guise", "Ra", "Megalopolis");
+            StartGame();
+            DestroyNonCharacterVillainCards();
+
+            GoToPlayCardPhase(omnix);
+            Card focusedPlasmaCannon = PlayCard("FocusedPlasmaCannon");
+            Card gaussianCoilBlaster = PlayCard("GaussianCoilBlaster");
+
+
+            GoToUsePowerPhase(guise);
+
+            //Select 1 component in play. That component's start of turn effects act at the end of this turn as well.
+            DecisionSelectCards = new Card[] {  focusedPlasmaCannon, baron.CharacterCard };
+            DecisionSelectPowers = new Card[] { omnix.CharacterCard };
+            PlayCard("ICanDoThatToo");
+
+            PrintSpecialStringsForCard(omnix.CharacterCard);
 
             QuickHPStorage(baron);
             GoToEndOfTurn(guise);
