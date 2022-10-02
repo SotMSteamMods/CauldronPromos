@@ -108,7 +108,7 @@ namespace CauldronPromosTests
             //Select 1 component in play. That component's start of turn effects act at the end of this turn as well.
             UsePower(legacy);
 
-            string expectedSpecialString = $"{componentCard.Title} is overclocked and will act at the end of {legacy.TurnTaker.Name}'s turn.";
+            string expectedSpecialString = $"{componentCard.Title} is overclocked and will act at the end of this turn.";
 
             PrintSpecialStringsForCard(omnix.CharacterCard);
             AssertCardSpecialString(omnix.CharacterCard, 0, expectedSpecialString);
@@ -136,7 +136,7 @@ namespace CauldronPromosTests
             //Select 1 component in play. That component's start of turn effects act at the end of this turn as well.
             UsePower(legacy);
 
-            string expectedSpecialString = $"{componentCard.Title} is overclocked and will act at the end of {legacy.TurnTaker.Name}'s turn.";
+            string expectedSpecialString = $"{componentCard.Title} is overclocked and will act at the end of this turn.";
 
             PrintSpecialStringsForCard(omnix.CharacterCard);
             AssertCardSpecialString(omnix.CharacterCard, 0, expectedSpecialString);
