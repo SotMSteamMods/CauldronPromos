@@ -13,40 +13,21 @@ namespace CauldronPromos.OmnitronX
         public OmnitronXICharacterCardController(Card card, TurnTakerController turnTakerController)
             : base(card, turnTakerController)
         {
-            SpecialStringMaker.ShowSpecialString(() => $"{string.Join(" and ", Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey).ToArray())} {Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey).Count().ToString_IsOrAre()} overclocked and will act at the end of {Game.Journal.GetCardPropertiesTurnTaker(CharacterCardWithoutReplacements, OverclockedTurnTakerKey).Name}'s turn.", showInEffectsList: () => true, relatedCards: () => OverclockedCards).Condition = SpecialStringCriteria;
+            SpecialStringMaker.ShowSpecialString(() => $"{string.Join(" and ", OverclockedCardsInPlay.Select(c => c.Title).ToArray())} {OverclockedCardsInPlay.Count().ToString_IsOrAre()} overclocked and will act at the end of this turn.").Condition = () => OverclockedCardsInPlay.Any();
         }
-
-        private bool SpecialStringCriteria()
-        {
-            return  Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey) != null &&
-                    Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey).Count() > 0 && 
-                    Game.Journal.GetCardPropertiesTurnTaker(CharacterCardWithoutReplacements, OverclockedTurnTakerKey) != null;
-        }
-
-        private List<ITrigger> _triggersChanged = new List<ITrigger>();
-        private Func<PhaseChangeAction, bool> _alternative;
 
         public static readonly string OverclockedCardsKey = "OverclockedCards";
-        public static readonly string OverclockedTurnTakerKey = "OverclockedTurnTaker";
-
-        private IEnumerable<Card> OverclockedCards
+        private bool IsOverclocked(Card c)
         {
-            get
+            IEnumerable<string> overclockedCardsQualifiedIdentifiers = Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey);
+            if (overclockedCardsQualifiedIdentifiers != null && overclockedCardsQualifiedIdentifiers.Any(overclockedQualifiedIdentifier => c.QualifiedIdentifier == overclockedQualifiedIdentifier))
             {
-                if(Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey) is null)
-                {
-                    return new List<Card>();
-                }
-
-                //this doesn't work perfectly if multiple cards have been overclocked and multiple of those have the same title, but thats a niche case i am not too worried about
-                return FindCardsWhere(c => c.IsInPlayAndHasGameText && Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey).Any(s => s == c.Title));
+                return true;
             }
+ 
+            return false;
         }
-
-        public override void AddStartOfGameTriggers()
-        {
-            AddOverclockTriggers();
-        }
+        private IEnumerable<Card> OverclockedCardsInPlay => FindCardsWhere(c => c.IsInPlayAndHasGameText && IsOverclocked(c));
 
         public override IEnumerator UsePower(int index = 0)
         {
@@ -70,9 +51,13 @@ namespace CauldronPromos.OmnitronX
 
             IEnumerable<Card> selectedCards = GetSelectedCards(storedResults);
 
-            OverclockCards(selectedCards);
-
-            coroutine = GameController.SendMessageAction($"{string.Join(" and ", selectedCards.Select(c => c.Title).ToArray())} {selectedCards.Count().ToString_IsOrAre()} overclocked and will act at the end of {Game.ActiveTurnTaker.Name}'s turn.", Priority.Medium, GetCardSource());
+            string description = $"{string.Join(" and ", selectedCards.Select(c => c.Title).ToArray())} {selectedCards.Count().ToString_IsOrAre()} overclocked and will act at the end of {Game.ActiveTurnTaker.Name}'s turn.";
+            OnPhaseChangeStatusEffect phaseChangeStatusEffect = new OnPhaseChangeStatusEffect(CardWithoutReplacements, "OverclockComponentEndOfTurnEffect", description, new TriggerType[] { TriggerType.ActivateTriggers }, Card);
+            phaseChangeStatusEffect.TurnPhaseCriteria.Phase = Phase.End;
+            phaseChangeStatusEffect.TurnTakerCriteria.IsSpecificTurnTaker = Game.ActiveTurnTaker;
+            phaseChangeStatusEffect.Identifier = String.Join(",", selectedCards.Select(c => c.QualifiedIdentifier).ToArray());
+            phaseChangeStatusEffect.UntilThisTurnIsOver(Game);
+            coroutine = AddStatusEffect(phaseChangeStatusEffect);
             if (UseUnityCoroutines)
             {
                 yield return GameController.StartCoroutine(coroutine);
@@ -81,87 +66,54 @@ namespace CauldronPromos.OmnitronX
             {
                 GameController.ExhaustCoroutine(coroutine);
             }
-        }
 
-        private void OverclockCards(IEnumerable<Card> selectedCards)
-        {
-            Game.Journal.RecordCardProperties(CharacterCardWithoutReplacements, OverclockedCardsKey, selectedCards.Select(c => c.Title));
-            Game.Journal.RecordCardProperties(CharacterCardWithoutReplacements, OverclockedTurnTakerKey, Game.ActiveTurnTaker);
-            AddOverclockTriggers();
-        }
-
-        private void AddOverclockTriggers()
-        {
-            CardController cardController = FindCardController(CharacterCardWithoutReplacements);
-            Trigger<PhaseChangeAction> trigger = new Trigger<PhaseChangeAction>(GameController, (PhaseChangeAction p) => p.ToPhase.IsEnd && Game.Journal.GetCardPropertiesTurnTaker(CharacterCardWithoutReplacements, OverclockedTurnTakerKey) != null && p.ToPhase.TurnTaker == Game.Journal.GetCardPropertiesTurnTaker(CharacterCardWithoutReplacements, OverclockedTurnTakerKey), p => ApplyChangesResponse(),new TriggerType[] { TriggerType.HiddenLast }, TriggerTiming.Before, GetCardSource());
-            cardController.AddTrigger(trigger);
-        }
-
-        private IEnumerator ApplyChangesResponse()
-        {
-            IEnumerable<Card> selectedCards = FindCardsWhere(c => Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey).Contains(c.Title) && c.IsInPlayAndHasGameText);
-            TurnTaker turnTakerToUse = Game.Journal.GetCardPropertiesTurnTaker(CharacterCardWithoutReplacements, OverclockedTurnTakerKey);
-            IEnumerable<TurnPhase> turnPhases = selectedCards.Select(c => c.Owner.TurnPhases.Where((TurnPhase phase) => phase.IsStart).First()).Distinct();
-            IEnumerable<PhaseChangeAction> fakeStarts = turnPhases.Select(tp => new PhaseChangeAction(GetCardSource(), null, tp, tp.IsEphemeral));
-            FindTriggersWhere((ITrigger t) => !_triggersChanged.Contains(t) && selectedCards.Contains(t.CardSource.Card) && t is PhaseChangeTrigger && fakeStarts.Any(fs => t.DoesMatchTypeAndCriteria(fs))).ForEach(delegate (ITrigger t)
+            // update the journal so we can reference the card name with a Special String
+            IEnumerable<string> overclockedCards = Game.Journal.GetCardPropertiesStringList(CharacterCardWithoutReplacements, OverclockedCardsKey);
+            List<string> updatedListOfCards = new List<string>();
+            if (overclockedCards != null)
             {
-                ApplyChangeTo((PhaseChangeTrigger)t, turnTakerToUse);
-            });
-
-            AddEndOfTurnTrigger(tt => tt == turnTakerToUse, RestoreTriggers, TriggerType.HiddenLast);
-            foreach (CardController cc in selectedCards.Select(c => FindCardController(c)))
-            {
-                cc.AddBeforeLeavesPlayActions(RestoreTriggers);
+                updatedListOfCards = overclockedCards.ToList();
             }
+            foreach (Card c in selectedCards)
+            {
+                if (!updatedListOfCards.Contains(c.QualifiedIdentifier))
+                {
+                    updatedListOfCards.Add(c.QualifiedIdentifier);
+                }
+            }
+            Game.Journal.RecordCardProperties(CharacterCardWithoutReplacements, OverclockedCardsKey, updatedListOfCards);
+
             yield return DoNothing();
         }
 
-        private void ApplyChangeTo(PhaseChangeTrigger trigger, TurnTaker turnTakerToUse)
+        public IEnumerator OverclockComponentEndOfTurnEffect(PhaseChangeAction pca, StatusEffect statusEffect)
         {
-            _alternative = (PhaseChangeAction p) => p.ToPhase.TurnTaker == turnTakerToUse && p.ToPhase.IsEnd;
-            trigger.AddAlternativeCriteria(_alternative);
-
-
-            _triggersChanged.Add(trigger);
-        }
-
-        private IEnumerator RestoreTriggers(GameAction action)
-        {
-            TurnTaker turnTakerToUse = Game.Journal.GetCardPropertiesTurnTaker(CharacterCardWithoutReplacements, OverclockedTurnTakerKey);
-            if(turnTakerToUse is null)
+            string[] selectedCardIdentifiers = statusEffect.Identifier.Split(',');
+            IEnumerator coroutine;
+            foreach (string identifier in selectedCardIdentifiers)
             {
-                yield break;
-            }
-            foreach (PhaseChangeTrigger trigger in _triggersChanged)
-            {
-                trigger.RemoveAlternativeCriteria(_alternative);
-                if (GameController.ActiveTurnPhase.TurnTaker != turnTakerToUse || !GameController.ActiveTurnPhase.IsEnd)
+                Card card = FindCardsWhere(c => c.QualifiedIdentifier == identifier && c.IsInPlayAndHasGameText).FirstOrDefault();
+                if (card is null)
                 {
                     continue;
                 }
-                TurnPhase turnPhase = turnTakerToUse.TurnPhases.Where((TurnPhase phase) => phase.IsEnd).First();
-                PhaseChangeAction action2 = new PhaseChangeAction(GetCardSource(), null, turnPhase, turnPhase.IsEphemeral);
-                if (trigger.CardSource.CardController.CardWithoutReplacements.IsInPlayAndHasGameText && !trigger.DoesMatchTypeAndCriteria(action2))
+                CardController cc = FindCardController(card);
+                IEnumerable<PhaseChangeTrigger> triggers = FindTriggersWhere(trigger => trigger.CardSource.CardController == cc && trigger is PhaseChangeTrigger pct && pct.PhaseCriteria(Phase.Start)).Select(trigger => trigger as PhaseChangeTrigger);
+                foreach (PhaseChangeTrigger trigger in triggers)
                 {
-                    AddTemporaryTriggerInhibitor((ITrigger t) => t == trigger, (PhaseChangeAction p) => true);
+                    coroutine = trigger.Response(pca);
+                    if (UseUnityCoroutines)
+                    {
+                        yield return GameController.StartCoroutine(coroutine);
+                    }
+                    else
+                    {
+                        GameController.ExhaustCoroutine(coroutine);
+                    }
                 }
             }
-
-            //theoretically if multiple cards got overclocked and then one left play before the end phase, this could omit one of the possible cards
-            Game.Journal.RecordCardProperties(CharacterCardWithoutReplacements, OverclockedCardsKey, (IEnumerable<string>) null);
-            Game.Journal.RecordCardProperties(CharacterCardWithoutReplacements, OverclockedTurnTakerKey, (TurnTaker) null);
-
-            yield return null;
-        }
-
-        private void AddTemporaryTriggerInhibitor<T>(Func<ITrigger, bool> triggerCriteria, Func<T, bool> expiryCriteria) where T : GameAction
-        {
-            GameController.AddTemporaryTriggerInhibitor(triggerCriteria, expiryCriteria, GetCardSource());
-        }
-
-        protected TurnTaker GetOriginalOwner(Card c)
-        {
-            return (FindTurnTakersWhere((TurnTaker tt) => tt.Identifier == c.ParentDeck.Identifier)).FirstOrDefault();
+            Game.Journal.RecordCardProperties(CharacterCardWithoutReplacements, OverclockedCardsKey, (IEnumerable<string>)null);
+            yield return DoNothing();
         }
 
         public override IEnumerator UseIncapacitatedAbility(int index)
